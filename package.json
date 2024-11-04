@@ -1,0 +1,22 @@
+{
+  "name": "dbms-endsem",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SakilAziz075/DBMS_ENDTERM.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SakilAziz075/DBMS_ENDTERM/issues"
+  },
+  "homepage": "https://github.com/SakilAziz075/DBMS_ENDTERM#readme",
+  "dependencies": {
+    "express": "^4.21.1"
+  }
+}

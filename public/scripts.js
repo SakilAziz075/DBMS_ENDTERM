@@ -7,6 +7,12 @@ const doctorsByDepartment = {
     dermatology: ["Dr. Gray", "Dr. Pink"]
 };
 
+//this is dummy data , the data will come from the DB once 
+//we make the server side backend
+// i was feeling lazy so i used colors instead of names 
+//thank you for watch this far.....
+
+
 const departmentSelect = document.getElementById("department");
 const doctorSelect = document.getElementById("doctor-name");
 
