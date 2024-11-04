@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Book an Appointment</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#find-doctor">Find a Doctor</a></li>
+                <li><a href="#medical-department">Medical Departments</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Appointment Form</h2>
+            <form id="appointment-form">
+                <label for="patient-name">Patient Name:</label>
+                <input type="text" id="patient-name" name="patient-name" required>
+
+                <label for="department">Select Department:</label>
+                <select id="department" name="department" required>
+                    <option value="" disabled selected>Select a department</option>
+                    <option value="cardiology">Cardiology</option>
+                    <option value="neurology">Neurology</option>
+                    <option value="pediatrics">Pediatrics</option>
+                    <option value="orthopedics">Orthopedics</option>
+                    <option value="dermatology">Dermatology</option>
+                </select>
+
+                <label for="doctor-name">Select Doctor:</label>
+                <select id="doctor-name" name="doctor-name" required>
+                    <option value="" disabled selected>Select a doctor</option>
+                </select>
+
+                <label for="appointment-date">Appointment Date:</label>
+                <input type="date" id="appointment-date" name="appointment-date" required>
+
+                <label for="appointment-time">Appointment Time:</label>
+                <input type="time" id="appointment-time" name="appointment-time" required>
+
+                <button type="submit">Submit Appointment</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Hospital Appointment System. All rights reserved.</p>
+    </footer>
+
+    <script src="./scripts.js"></script>
+</body>
+</html>
