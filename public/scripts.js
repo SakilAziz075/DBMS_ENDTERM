@@ -1,33 +1,43 @@
-
-const doctorsByDepartment = {
-    cardiology: ["Dr. Smith", "Dr. Brown"],
-    neurology: ["Dr. Green", "Dr. Black"],
-    pediatrics: ["Dr. White", "Dr. Blue"],
-    orthopedics: ["Dr. Red", "Dr. Yellow"],
-    dermatology: ["Dr. Gray", "Dr. Pink"]
-};
-
-//this is dummy data , the data will come from the DB once 
-//we make the server side backend
-// i was feeling lazy so i used colors instead of names 
-//thank you for watch this far.....
-
-
+// scripts.js
 const departmentSelect = document.getElementById("department");
 const doctorSelect = document.getElementById("doctor-name");
+const appointmentForm = document.getElementById("appointment-form");
 
-departmentSelect.addEventListener("change", function() {
+// Fetch doctors when department changes
+departmentSelect.addEventListener("change", async function () {
     const selectedDepartment = departmentSelect.value;
-    const doctors = doctorsByDepartment[selectedDepartment];
-
-    // Clear previous options
+    const response = await fetch(`/api/doctors?department=${selectedDepartment}`);
+    const doctors = await response.json();
     doctorSelect.innerHTML = '<option value="" disabled selected>Select a doctor</option>';
-
-    // Populate doctors based on the selected department
     doctors.forEach(doctor => {
         const option = document.createElement("option");
-        option.value = doctor;
-        option.textContent = doctor;
+        option.value = doctor.id;
+        option.textContent = doctor.name;
         doctorSelect.appendChild(option);
     });
+});
+
+// Handle form submission
+appointmentForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
+    const patientName = document.getElementById("patient-name").value;
+    const doctorId = doctorSelect.value;
+    const appointmentDate = document.getElementById("appointment-date").value;
+    const appointmentTime = document.getElementById("appointment-time").value;
+
+    const response = await fetch('/api/appointments', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ doctorId, patientName, appointmentDate, appointmentTime }),
+    });
+
+    if (response.ok) {
+        const result = await response.json();
+        alert(result.message);
+        appointmentForm.reset();
+    } else {
+        alert('Error booking appointment');
+    }
 });
