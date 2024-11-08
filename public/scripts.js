@@ -1,4 +1,3 @@
-// scripts.js
 const departmentSelect = document.getElementById("department");
 const doctorSelect = document.getElementById("doctor-name");
 const appointmentForm = document.getElementById("appointment-form");
