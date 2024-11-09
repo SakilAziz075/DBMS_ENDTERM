@@ -1,12 +1,11 @@
+const mysql = require('mysql2');
 
-require('dotenv').config();
-const mysql = require('mysql2/promise');
-
-const db = mysql.createPool({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-});
+// Create the connection and call `.promise()` to convert it to promise-based
+const db = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'hospital_management',
+}).promise();
 
 module.exports = db;

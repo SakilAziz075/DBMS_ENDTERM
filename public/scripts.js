@@ -4,10 +4,12 @@ const appointmentForm = document.getElementById("appointment-form");
 
 // Fetch doctors when department changes
 departmentSelect.addEventListener("change", async function () {
+    
     const selectedDepartment = departmentSelect.value;
     const response = await fetch(`/api/doctors?department=${selectedDepartment}`);
     const doctors = await response.json();
     doctorSelect.innerHTML = '<option value="" disabled selected>Select a doctor</option>';
+    
     doctors.forEach(doctor => {
         const option = document.createElement("option");
         option.value = doctor.id;
@@ -26,7 +28,8 @@ appointmentForm.addEventListener("submit", async function (event) {
 
     const response = await fetch('/api/appointments', {
         method: 'POST',
-        headers: {
+        headers: 
+        {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({ doctorId, patientName, appointmentDate, appointmentTime }),
