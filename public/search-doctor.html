@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search for a Doctor</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Search for a Doctor</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="book-appointment.html">Book Appointment</a></li>
+                <li><a href="doctor-login.html">Doctor Login</a></li>
+                <li><a href="#medical-department">Medical Departments</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section>
+            <h2>Find a Doctor</h2>
+            <input type="text" id="search-query" placeholder="Search by name, department, or specialty">
+            <button id="search-btn">Search</button>
+            
+            <ul id="doctor-list"></ul> <!-- List of doctors will appear here -->
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Hospital Appointment System. All rights reserved.</p>
+    </footer>
+
+    <script src="search-doctor.js"></script> <!-- Link to search script -->
+</body>
+</html>

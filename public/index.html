@@ -11,10 +11,10 @@
         <h1>Hospital Appointment System</h1>
         <nav>
             <ul>
-                <li><a href="#book-appointment">Book Appointment</a></li>
-                <li><a href="#doctor-login">Doctor Login</a></li>
-                <li><a href="#find-doctor">Find a Doctor</a></li>
-                <li><a href="#medical-department">Medical Departments</a></li>
+                <li><button onclick="location.href='book-appointment.html'">Book Appointment</button></li>
+                <li><button onclick="location.href='doctor-login.html'">Doctor Login</button></li>
+                <li><button onclick="location.href='search-doctor.html'">Search for a Doctor</button></li>
+                <li><button onclick="location.href='#medical-department'">Medical Departments</button></li>
             </ul>
         </nav>
     </header>
@@ -29,27 +29,23 @@
             <h2>Doctor Login here</h2>
             <button onclick="location.href='doctor-login.html'">Login</button>
         </section>
-        
-        <section id="find-doctor">
-            <h2>Find a Doctor</h2>
-            <input type="text" placeholder="Search for a doctor...">
-            <button>Search</button>
-        </section>
-        
-        <section id="medical-department">
-            <h2>Medical Departments</h2>
-            <ul>
-                <li><a href="cardiology.html">Cardiology</a></li>
-                <li><a href="neurology.html">Neurology</a></li>
-                <li><a href="pediatrics.html">Pediatrics</a></li>
-                <li><a href="orthopedics.html">Orthopedics</a></li>
-                <li><a href="dermatology.html">Dermatology</a></li>
-            </ul>
-        </section>
     </main>
 
     <footer>
         <p>&copy; 2024 Hospital Appointment System. All rights reserved.</p>
+        <a href="admin-login.html" class="admin-link">Admin</a> <!-- Discreet admin link -->
     </footer>
+
+    <style>
+        /* Style to make the admin link less noticeable */
+        .admin-link {
+            color: #aaa; /* Light gray color */
+            font-size: 0.9em;
+            text-decoration: none;
+        }
+        .admin-link:hover {
+            color: #555; /* Darker gray on hover */
+        }
+    </style>
 </body>
 </html>
