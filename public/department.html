@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Department</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #d4bee4;
+        }
+        .doctor-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Two columns, each taking 1/2 width */
+            gap: 20px;
+        }
+        .doctor-card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            background-color: #eeeeee;
+            box-shadow: 0 2px 4px rgba(110, 34, 145, 0.179);
+            border-radius: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .doctor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(120, 59, 146, 0.2);
+        }
+        .doctor-card h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.3em;
+            color: #3b1e54;
+        }
+        .doctor-card p {
+            margin: 5px 0;
+            color: #3b1e54;
+            font-size:large;
+        }
+        @media (max-width: 600px) {
+            .doctor-cards {
+                grid-template-columns: 1fr; /* Single column on small screens */
+            }
+            .doctor-card h3 {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+    <script>
+        async function fetchDoctors(department) {
+            try {
+                const response = await fetch(`http://localhost:3000/api/doctors?department=${department}`);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const doctors = await response.json();
+
+                const doctorsContainer = document.getElementById('doctors');
+                doctorsContainer.innerHTML = '';
+
+                if (doctors.length > 0) {
+                    doctors.forEach(doctor => {
+                        const doctorCard = document.createElement('div');
+                        doctorCard.classList.add('doctor-card');
+                        doctorCard.innerHTML = `
+                            <h3>${doctor.doctorName}</h3>
+                            <p>Department: ${doctor.department}</p>
+                            <p>Experience: ${doctor.experience} years</p>
+                        `;
+                        doctorsContainer.appendChild(doctorCard);
+                    });
+                } else {
+                    doctorsContainer.innerHTML = '<p>No doctors found for this department.</p>';
+                }
+            } catch (error) {
+                console.error('Error fetching doctors:', error);
+                document.getElementById('doctors').innerHTML = '<p>Error fetching doctors.</p>';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const department = params.get('department');
+            document.getElementById('departmentName').textContent = department;
+            fetchDoctors(department);
+        });
+    </script>
+</head>
+<body>
+    <h1 style="color: #3b1e54;">Doctors in <span id="departmentName"></span> Department</h1>
+    <div id="doctors" class="doctor-cards"></div>
+</body>
+</html>
