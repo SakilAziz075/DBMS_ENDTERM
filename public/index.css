@@ -2,7 +2,7 @@
 html, body {
     font-family: Arial, sans-serif;
     padding: 0;
-    background-color: #ffffff; /* White background for contrast */
+    background-color: #f5faff; /* Light blue background */
     height: 100%;
     margin: 0;
     display: flex;
@@ -11,7 +11,7 @@ html, body {
 
 /* Header */
 header {
-    background: #006d77; /* Dark teal blue */
+    background: linear-gradient(180deg, #3a7bd5, #3f51b5); /* Blue gradient */
     color: #ffffff;
     padding: 20px 0;
     text-align: center;
@@ -36,14 +36,47 @@ nav ul li button {
 }
 
 nav ul li button:hover {
-    background: #ff6f59; /* Orange for hover */
-    color: #006d77; /* Blue text on hover */
+    text-decoration: underline;
 }
 
-/* Hero Section */
+.login-icon {
+    position: absolute;
+    top: 15px; /* Adjust for spacing from the top */
+    right: 15px; /* Adjust for spacing from the right */
+}
+
+.login-icon img {
+    width: 48px; /* Adjust size as needed */
+    height: 48px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.login-icon img:hover {
+    transform: scale(1.1); /* Slightly enlarge on hover */
+}
+
+
+
+
+/* Hero Section with Enhanced Gradient */
+@keyframes heroGradientMove {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
 .hero {
-    background: #006d77; /* Dark blue */
-    color: #ffffff;
+    background: linear-gradient(135deg, #4ec2f8, #a182e9, #0182be); /* Light to deep blue gradient */
+    background-size: 400% 400%; /* Expanded gradient size */
+    animation: heroGradientMove 7s ease infinite; /* Smooth looping gradient */
+    color: #007bb5; /* Vibrant blue */
     text-align: center;
     padding: 3rem 1rem;
     display: flex;
@@ -55,7 +88,7 @@ nav ul li button:hover {
 
 .hero h2 {
     font-size: 2rem;
-    color: #ffffff;
+    color: #344e5a;
     margin-bottom: 0.5rem;
 }
 
@@ -63,22 +96,22 @@ nav ul li button:hover {
     max-width: 600px;
     font-size: 1.2rem;
     line-height: 1.5;
-    color: #ffffff;
+    color: #333;
 }
 
 .hero button {
     padding: 0.8rem 1.5rem;
     font-size: 1.1rem;
-    background: #ff6f59; /* Bright orange */
+    background: #007bb5;
     border: none;
     border-radius: 5px;
-    color: #ffffff;
+    color: #fff;
     cursor: pointer;
     transition: background 0.3s ease;
 }
 
 .hero button:hover {
-    background: #006d77; /* Blue on hover */
+    background: #005f8c;
 }
 
 /* Main Content */
@@ -89,23 +122,22 @@ main {
 
 /* Services Section */
 .services {
-    background-color: #006d77; /* Blue background */
+    background-color: #f0f7ff; /* Very light blue */
     padding: 20px;
     border-radius: 8px;
     margin: 20px 0;
     text-align: center;
-    color: white;
 }
 
 .services h2 {
     font-size: 1.8rem;
-    color: #ffffff;
+    color: #007bb5;
     margin-bottom: 10px;
 }
 
 .services p {
     font-size: 1.1rem;
-    color: #ffffff;
+    color: #007bb5;
     margin-bottom: 15px;
 }
 
@@ -120,21 +152,24 @@ main {
 
 .service-list li {
     font-size: 1.1rem;
-    color: #006d77;
-    background-color: #ffffff; /* White background */
+    font-weight: bold; /* Make text bold */
+    color: #ffffff; /* White text */
+    background-color: #007bb5; /* Blue background */
     padding: 20px 25px;
-    border: 2px solid #006d77; /* Border color */
+    border: 2px solid #007bb5; /* Border matches the background color */
     border-radius: 8px;
     margin: 10px;
-    transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
     cursor: pointer;
 }
 
 .service-list li:hover {
-    background-color: #ff6f59; /* Orange on hover */
-    border-color: #ff6f59;
-    transform: scale(1.05);
+    background-color: #ffffff; /* White background on hover */
+    color: #007bb5; /* Blue text on hover */
+    border-color: #007bb5; /* Border matches the blue text */
+    transform: scale(1.05); /* Slight zoom effect */
 }
+
 
 /* Quick Links Section */
 .quick-links {
@@ -143,13 +178,13 @@ main {
     border-radius: 8px;
     margin: 20px 0;
     text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Light shadow */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Enhanced shadow */
 }
 
 .quick-links h2 {
     font-size: 1.8rem;
-    color: #006d77;
-    margin-bottom: 10px;
+    color: #3a7bd5; /* Vibrant blue */
+    margin-bottom: 15px;
 }
 
 .links-list {
@@ -157,49 +192,57 @@ main {
     padding: 0;
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 15px;
     flex-wrap: wrap;
 }
 
+.links-list li {
+    margin: 5px;
+}
+
 .links-list li a {
-    color: #006d77;
+    color: #3a7bd5; /* Blue text */
     font-size: 1.1rem;
-    text-decoration: none;
     font-weight: bold;
-    transition: color 0.3s ease, transform 0.3s ease;
+    background-color: #ffffff; /* White background */
+    padding: 10px 20px;
+    border: 2px solid #3a7bd5;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
 }
 
 .links-list li a:hover {
-    color: #ff6f59; /* Orange on hover */
-    transform: scale(1.1); /* Slight zoom effect */
+    color: #ffffff; /* White text on hover */
+    background-color: #3a7bd5; /* Blue background on hover */
+    transform: scale(1.05); /* Slight zoom effect */
 }
 
 /* About Section */
 .about {
-    background-color: #006d77; /* Blue background */
+    background-color: #f0f7ff;
     padding: 20px;
     border-radius: 8px;
     margin: 20px 0;
     text-align: center;
-    color: white;
 }
 
 .about h2 {
     font-size: 1.8rem;
-    color: #ffffff;
+    color: #007bb5;
     margin-bottom: 10px;
 }
 
 .about p {
     font-size: 1.1rem;
-    color: #ffffff;
+    color: #555;
     margin-bottom: 15px;
 }
 
 .about button {
     padding: 0.8rem 1.5rem;
     font-size: 1rem;
-    background-color: #ff6f59; /* Orange */
+    background-color: #007bb5;
     color: #ffffff;
     border: none;
     border-radius: 5px;
@@ -207,14 +250,14 @@ main {
 }
 
 .about button:hover {
-    background-color: #006d77; /* Blue on hover */
+    background-color: #005f8c;
 }
 
 /* Footer */
 footer {
     text-align: center;
     padding: 10px 0;
-    background: #006d77;
+    background: linear-gradient(135deg, #3a7bd5, #3f51b5); /* Blue gradient */
     color: #ffffff;
     margin-top: auto;
 }
@@ -229,7 +272,7 @@ footer {
 }
 
 .admin-link:hover {
-    color: #ff6f59; /* Orange on hover */
+    color: #b3e5fc;
 }
 
 /* Form Styles */
@@ -245,17 +288,29 @@ form label {
 form input, form select {
     padding: 10px;
     margin-bottom: 10px;
-    border: 2px solid #006d77;
+    border: 1px solid #ccc;
     border-radius: 5px;
 }
 
-form input[type="submit"] {
-    background-color: #ff6f59;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+form button {
+    align-self: start;
 }
 
-form input[type="submit"]:hover {
-    background-color: #006d77; /* Blue on hover */
+/* Enhanced Button Styling */
+button {
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 10px 20px;
+    color: #3a7bd5; /* Blue text */
+    background-color: #ffffff; /* White background */
+    border: 2px solid #3a7bd5;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+    background-color: #3a7bd5; /* Blue background on hover */
+    color: #ffffff; /* White text on hover */
+    transform: scale(1.05); /* Slight zoom effect */
 }

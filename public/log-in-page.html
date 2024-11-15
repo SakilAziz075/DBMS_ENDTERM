@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="left-section">
+      <div class="illustration">
+        <div class="doctor"></div>
+        <div class="user"></div>
+        <div ><img src="./assests/duplicate-concept-illustration_114360-4500.avif" class="heart-icon" alt=""></div>
+      </div>
+    </div>
+    <div class="right-section">
+      <div class="login-box">
+        <h2>Login</h2>
+        <div class="tabs">
+          <button onclick="selectTab('patient')" id="patient-tab" class="tab active">Patient</button>
+          <button onclick="selectTab('Doctor')" id="doctor-tab" class="tab">Doctor</button>
+          <button onclick="selectTab('Admin')" id="admin-tab" class="tab">Admin</button>
+        </div>
+        <div class="form">
+            <div class="avatar">
+                <img id="avatar-img" src="./assests/user.png" alt="Avatar">
+              </div>
+                           
+          <label for="id" id="id-label">Patient ID</label>
+          <input type="text" id="id" placeholder="Enter your ID">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Enter your password">
+          <button class="submit">Submit</button>
+          <p class="forgot-password">Forget Password? <a href="#">Get it on Email!</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="scripts.js"></script>
+</body>
+</html>
