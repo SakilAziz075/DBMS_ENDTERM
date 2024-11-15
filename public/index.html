@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Appointment System</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+    <title>Hospital Appointment System</title>
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
     <header>
@@ -14,39 +14,54 @@
                 <li><button onclick="location.href='book-appointment.html'">Book Appointment</button></li>
                 <li><button onclick="location.href='doctor-login.html'">Doctor Login</button></li>
                 <li><button onclick="location.href='search-doctor.html'">Search for a Doctor</button></li>
-                <li><button onclick="location.href='#medical-department'">Medical Departments</button></li>
+                <li><button onclick="location.href='find-doctor.html'">Medical Departments</button></li>
             </ul>
         </nav>
     </header>
-    
+
+    <section class="hero">
+        <h2>Welcome to Our Appointment System</h2>
+        <p>Conveniently book an appointment, connect with our experienced doctors, and get the healthcare you deserve.</p>
+        <button onclick="location.href='book-appointment.html'">Get Started</button>
+    </section>
+
     <main>
-        <section id="book-appointment">
-            <h2>Book an Appointment</h2>
-            <button onclick="location.href='book-appointment.html'">Book Now</button>
+        <!-- Services Section -->
+        <section class="services">
+            <h2>Services We Cover</h2>
+            <p>We provide a wide variety of medical services, offering expert tips and advice for your healthcare treatment.</p>
+            <ul class="service-list">
+                <li>Dental Care</li>
+                <li>ENT Clinic</li>
+                <li>Cardiology</li>
+                <li>Precise Diagnosis</li>
+                <li>Ambulance Services</li>
+            </ul>
         </section>
-        
-        <section id="doctor-login">
-            <h2>Doctor Login here</h2>
-            <button onclick="location.href='doctor-login.html'">Login</button>
+
+        <!-- Quick Links Section -->
+        <section class="quick-links">
+            <h2>Quick Links</h2>
+            <ul class="links-list">
+                <li><a href="#">Doctors</a></li>
+                <li><a href="#">Creators</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Booking</a></li>
+            </ul>
+        </section>
+
+        <!-- More About Us Section -->
+        <section class="about">
+            <h2>More About Us</h2>
+            <p>Learn more about our team, our values, and how we strive to provide the best healthcare services to our patients.</p>
+            <button onclick="location.href='about-us.html'">Read More</button>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2024 Hospital Appointment System. All rights reserved.</p>
-        <a href="admin-login.html" class="admin-link">Admin</a> <!-- Discreet admin link -->
+        <p>&copy; 2024 Hospital Appointment System. <br> Designed and Developed together by Sakil Aziz and Sanju Kumari Gupta.</p>
+        <a href="admin-login.html" class="admin-link">Admin</a>
     </footer>
-
-    <style>
-        /* Style to make the admin link less noticeable */
-        .admin-link {
-            color: white; /* Light gray color */
-            font-size: 1.1rem;
-            font-weight: bold;
-            text-decoration: none;
-        }
-        .admin-link:hover {
-            color:#98929e; /* Darker gray on hover */
-        }
-    </style>
 </body>
 </html>

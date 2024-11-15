@@ -4,78 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Find Doctor</title>
-    <style>
-        /* General reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-            background-color: #f8f9fa;
-            color: #333;
-            display: flex;
-            justify-content: center;
-        }
-
-        /* Container for content */
-        .container {
-            max-width: 800px;
-            width: 100%;
-            padding: 20px;
-            background-color:#ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-
-        h1 {
-            font-size: 2em;
-            color: #3b1e54 ;
-            margin-bottom: 20px;
-        }
-
-        /* Department cards styling */
-        .department {
-            margin: 15px 0;
-            padding: 20px;
-            background-color:  #3b1e54;
-            color: #ffffff;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            font-size: 1.2em;
-            font-weight: bold;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Hover effect for department cards */
-        .department:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            background-color: #d4bee4;
-            color: #3b1e54;
-        }
-
-        /* Responsive design */
-        @media (max-width: 600px) {
-            .container {
-                padding: 15px;
-            }
-
-            h1 {
-                font-size: 1.8em;
-            }
-
-            .department {
-                font-size: 1em;
-                padding: 15px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="find-doctor.css">
     <script>
         function navigateToDepartment(department) {
             window.location.href = `department.html?department=${department}`;

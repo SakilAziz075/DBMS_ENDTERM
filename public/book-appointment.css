@@ -1,0 +1,145 @@
+/* General Styles */
+html, body {
+    font-family: Arial, sans-serif;
+    padding: 0;
+    background-color: #f9f9f9; /* Light background for the form */
+    margin: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+header {
+    background: #006d77; /* Dark teal blue */
+    color: #ffffff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2rem;
+}
+
+/* Navigation */
+nav ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #ff6f59; /* Highlight color on hover */
+}
+
+/* Main Content */
+main {
+    flex-grow: 1; /* Ensure the content takes up all available space */
+    background-color: #ffffff;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Appointment Form Section */
+section {
+    background-color: #edf6f9; /* Light blue background for the form */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+section h2 {
+    font-size: 1.8rem;
+    color: #006d77;
+    margin-bottom: 15px;
+}
+
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+}
+
+form label {
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+form input, form select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 1rem;
+}
+
+form button {
+    padding: 12px 20px;
+    background-color: #ff6f59; /* Bright orange */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background 0.3s ease;
+    align-self: center;
+}
+
+form button:hover {
+    background-color: #ff9a76; /* Lighten color on hover */
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background: #006d77;
+    color: #ffffff;
+}
+
+footer p {
+    margin: 0;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 1.6rem;
+    }
+
+    nav ul li {
+        display: block;
+        margin: 10px 0;
+    }
+
+    form {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    form input, form select {
+        width: 100%;
+    }
+
+    form button {
+        width: 100%;
+    }
+}
