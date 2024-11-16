@@ -44,57 +44,6 @@ appointmentForm.addEventListener("submit", async function (event) {
     }
 });
 
-// function selectTab(role) {
-//   const idLabel = document.getElementById('id-label');
-//   const tabs = document.querySelectorAll('.tab');
-  
-//   tabs.forEach(tab => {
-//     tab.classList.remove('active');
-//   });
-  
-//   document.getElementById(role.toLowerCase() + '-tab').classList.add('active');
-  
-//   if (role === 'patient') {
-//     idLabel.textContent = 'Patient ID';
-//   } else if (role === 'Doctor') {
-//     idLabel.textContent = 'Doctor ID';
-//   } else if (role === 'Admin') {
-//     idLabel.textContent = 'Admin ID';
-//   }
-// }
-
-function selectTab(role) {
-  const idLabel = document.getElementById('id-label');
-  const tabs = document.querySelectorAll('.tab');
-  const avatarImg = document.getElementById('avatar-img');
-
-  // Remove 'active' class from all tabs and add to the selected one
-  tabs.forEach(tab => {
-      tab.classList.remove('active');
-  });
-  document.getElementById(role.toLowerCase() + '-tab').classList.add('active');
-  
-  // Update ID label and avatar image based on selected role
-  switch (role) {
-      case 'Patient':
-          idLabel.textContent = 'Patient ID';
-          avatarImg.src = '../assests/user.png'; // Correct path to the patient avatar image
-          break;
-      case 'Doctor':
-          idLabel.textContent = 'Doctor ID';
-          avatarImg.src = './assests/doctor.png'; // Path to the doctor avatar image
-          break;
-      case 'Admin':
-          idLabel.textContent = 'Admin ID';
-          avatarImg.src = './assests/software-engineer.png'; // Path to the admin avatar image
-          break;
-      default:
-          idLabel.textContent = 'Patient ID';
-          avatarImg.src = './assests/user.png'; // Fallback to patient avatar
-          break;
-  }
-}
-
   
   
 
