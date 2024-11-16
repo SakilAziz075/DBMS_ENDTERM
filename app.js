@@ -15,5 +15,5 @@ app.use('/api/admin', adminRoute); // Use the admin routes
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`server running on ${PORT}`);
+    console.log(`server running on ${PORT} \n running at http://localhost:3000`);
 });
