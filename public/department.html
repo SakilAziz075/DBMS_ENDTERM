@@ -1,52 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Department</title>
-    <link rel="stylesheet" href="department.css">
+    <link rel="stylesheet" href="department.css" />
     <script>
-        async function fetchDoctors(department) {
-            try {
-                const response = await fetch(`http://localhost:3000/api/doctors?department=${department}`);
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const doctors = await response.json();
+      async function fetchDoctors(department) {
+        try {
+          const response = await fetch(
+            `http://localhost:3000/api/doctors?department=${department}`
+          );
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          const doctors = await response.json();
 
-                const doctorsContainer = document.getElementById('doctors');
-                doctorsContainer.innerHTML = '';
+          const doctorsContainer = document.getElementById("doctors");
+          doctorsContainer.innerHTML = "";
 
-                if (doctors.length > 0) {
-                    doctors.forEach(doctor => {
-                        const doctorCard = document.createElement('div');
-                        doctorCard.classList.add('doctor-card');
-                        doctorCard.innerHTML = `
+          if (doctors.length > 0) {
+            doctors.forEach((doctor) => {
+              const doctorCard = document.createElement("div");
+              doctorCard.classList.add("doctor-card");
+              doctorCard.innerHTML = `
                             <h3>${doctor.name}</h3>
                             <p>Department: ${doctor.department}</p>
-                            <p>Experience: ${doctor.specialization} years</p>
+                            <p>Experience: ${doctor.experience || 0} years</p>
                         `;
-                        doctorsContainer.appendChild(doctorCard);
-                    });
-                } else {
-                    doctorsContainer.innerHTML = '<p>No doctors found for this department.</p>';
-                }
-            } catch (error) {
-                console.error('Error fetching doctors:', error);
-                document.getElementById('doctors').innerHTML = '<p>Error fetching doctors.</p>';
-            }
+              doctorsContainer.appendChild(doctorCard);
+            });
+          } else {
+            doctorsContainer.innerHTML =
+              "<p>No doctors found for this department.</p>";
+          }
+        } catch (error) {
+          console.error("Error fetching doctors:", error);
+          document.getElementById("doctors").innerHTML =
+            "<p>Error fetching doctors.</p>";
         }
+      }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const params = new URLSearchParams(window.location.search);
-            const department = params.get('department');
-            document.getElementById('departmentName').textContent = department;
-            fetchDoctors(department);
-        });
+      document.addEventListener("DOMContentLoaded", () => {
+        const params = new URLSearchParams(window.location.search);
+        const department = params.get("department");
+        document.getElementById("departmentName").textContent = department;
+        fetchDoctors(department);
+      });
     </script>
-</head>
-<body>
-    <h1 style="color: #3b1e54;">Doctors in <span id="departmentName"></span> Department</h1>
+  </head>
+  <body>
+    <h1 style="color: #3b1e54">
+      Doctors in <span id="departmentName"></span> Department
+    </h1>
     <div id="doctors" class="doctor-cards"></div>
-</body>
+  </body>
 </html>
