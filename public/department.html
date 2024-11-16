@@ -55,4 +55,146 @@
     </h1>
     <div id="doctors" class="doctor-cards"></div>
   </body>
+    <script>
+        function openAppointmentForm(doctorID, doctorName, slotsJSON) {
+            document.getElementById('appointmentForm').style.display = 'block';
+            document.getElementById('modalOverlay').style.display = 'block';
+            document.getElementById('selectedDoctor').textContent = doctorName;
+            document.getElementById('doctorID').value = doctorID; // Populate hidden input for doctor ID
+    
+            const availableSlots = JSON.parse(decodeURIComponent(slotsJSON));
+            populateTimeSlots(availableSlots);
+        }
+    
+        function populateTimeSlots(availableSlots) {
+            const timeSlotsContainer = document.getElementById('timeSlots');
+            timeSlotsContainer.innerHTML = ''; // Clear existing slots
+    
+            if (availableSlots.length === 0) {
+                timeSlotsContainer.innerHTML = '<p>No available slots.</p>';
+                return;
+            }
+    
+            availableSlots.forEach(slot => {
+                const slotButton = document.createElement('button');
+                slotButton.type = 'button';
+                slotButton.textContent = slot;
+                slotButton.className = 'time-slot-btn';
+                slotButton.onclick = () => selectTimeSlot(slot);
+                timeSlotsContainer.appendChild(slotButton);
+            });
+        }
+    
+        function selectTimeSlot(slot) {
+            const selectedSlotInput = document.getElementById('appointmentTime');
+            selectedSlotInput.value = slot;
+    
+            // Highlight the selected button
+            document.querySelectorAll('.time-slot-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+    
+            event.target.classList.add('selected');
+        }
+    
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const department = params.get('department');
+            document.getElementById('departmentName').textContent = department;
+            fetchDoctors(department);
+        });
+    </script>
+    
+    <style>
+        /* Modal styling */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            z-index: 1000;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 999;
+        }
+
+        .doctor-card {
+            margin-bottom: 20px;
+        }
+
+        .time-slot-btn {
+            margin: 5px;
+            padding: 8px 12px;
+            background: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .time-slot-btn:hover {
+            background: #d0d0f0;
+        }
+
+        .time-slot-btn.selected {
+            background: #3b1e54;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="color: #3b1e54;">Doctors in <span id="departmentName"></span> Department</h1>
+    <div id="doctors" class="doctor-cards"></div>
+
+    <!-- Appointment Form Modal -->
+    <div id="appointmentForm" class="modal">
+        <h2>Book Appointment</h2>
+        <p>Doctor: <span id="selectedDoctor"></span></p>
+        <form action="http://localhost:3000/api/appointments" method="POST">
+            <input type="hidden" id="doctorID" name="doctorID"> <!-- Hidden input for doctor ID -->
+            <input type="hidden" id="appointmentTime" name="appointmentTime"> <!-- Hidden input for selected time -->
+            <div>
+                <label for="patientName">Patient Name:</label>
+                <input type="text" id="patientName" name="patientName" required>
+            </div>
+            <div>
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" required>
+            </div>
+            <div>
+                <label for="guardianName">Guardian Name:</label>
+                <input type="text" id="guardianName" name="guardianName">
+            </div>
+            <div>
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender" required>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div>
+                <p>Select Time Slot:</p>
+                <div id="timeSlots"></div>
+            </div>
+            
+            <button type="submit">Submit</button>
+            <button type="button" onclick="closeAppointmentForm()">Cancel</button>
+        </form>
+    </div>
+    <div id="modalOverlay" class="modal-overlay" onclick="closeAppointmentForm()"></div>
+</body>
 </html>
