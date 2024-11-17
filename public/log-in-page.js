@@ -25,9 +25,13 @@ document.querySelector('.submit').addEventListener('click', function(event) {
 
         if (selectedRole === 'patient-tab') {
             window.location.href = 'patient-dashboard.html'; // Redirect to patient dashboard
-        } else if (selectedRole === 'doctor-tab') {
+        }else if (selectedRole === 'doctor-tab') {
+            // Simulate storing doctorID (replace with actual ID from the server response)
+            const doctorID = idInput.value;
+            localStorage.setItem('doctorID', doctorID);
             window.location.href = 'doctor-dashboard.html'; // Redirect to doctor dashboard
         }
+        
     }
 
     // Prevent form submission if validation fails
