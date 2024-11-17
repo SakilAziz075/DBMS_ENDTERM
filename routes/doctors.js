@@ -26,28 +26,28 @@ router.get('/', async (req, res) => {
                 let hours = date.getHours();
                 const minutes = date.getMinutes().toString().padStart(2, '0');
                 const ampm = hours >= 12 ? 'PM' : 'AM';
-                hours = hours % 12; // Convert to 12-hour format
-                hours = hours ? hours : 12; // 12:00 is 12 not 0
+                hours = hours % 12;
+                hours = hours ? hours : 12;  // The hour '0' should be '12'
                 return `${hours}:${minutes} ${ampm}`;
             }
 
-            // Add 10-minute intervals
+            // Create a list of available time slots
             while (start < end) {
                 availableSlots.push(formatTime(start));
-
-                // Increment by 10 minutes
-                start.setMinutes(start.getMinutes() + 10);
+                start.setMinutes(start.getMinutes() + 30); // Add 30 minutes slot
             }
 
-            return { ...doctor, availableSlots };
+            return {
+                ...doctor,
+                availableSlots,
+            };
         });
 
         res.json(doctorsWithSlots);
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Error fetching doctors' });
+        console.error('Error fetching doctors:', error);
+        res.status(500).json({ error: 'Failed to fetch doctors.' });
     }
 });
-
 
 module.exports = router;
