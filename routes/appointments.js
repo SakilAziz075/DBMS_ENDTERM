@@ -17,9 +17,9 @@ function convertTo24HourFormat(timeStr) {
 }
 
 router.post("/", async (req, res) => {
-  const { doctorID, patientName, age, guardianName, gender, appointmentTime } = req.body;
+  const { doctorID, patientName, age, guardianName, gender,  appointmentDate, appointmentTime } = req.body;
 
-  if (!doctorID || !patientName || !age || !gender || !appointmentTime) {
+  if (!doctorID || !patientName || !age || !gender || ! appointmentDate || !appointmentTime) {
     return res.status(400).json({ error: "All fields are required!" });
   }
 
@@ -29,7 +29,7 @@ router.post("/", async (req, res) => {
 
     await db.query(
       `INSERT INTO appointments (doctor_id, patient_name, age, guardian_name, gender, appointment_time) VALUES (?, ?, ?, ?, ?, ?)`,
-      [doctorID, patientName, age, guardianName || null, gender, appointmentTime24Hour]
+      [doctorID, patientName, age, guardianName || null, gender, appointmentDate, appointmentTime24Hour]
     );
     res.status(201).json({ message: "Appointment booked successfully!" });
   } catch (error) {
@@ -38,22 +38,27 @@ router.post("/", async (req, res) => {
   }
 });
 
-// Fetch all appointments for a specific doctor
-// Fetch all appointments for a specific doctor
-router.get('/doctor/:doctorID', async (req, res) => {
-    const { doctorID } = req.params;
 
-    try {
-        const [rows] = await db.query(
-            'SELECT patient_name AS patientName, appointmentDate AS date, appointmentTime AS time, "Confirmed" AS status FROM appointments WHERE doctor_id = ? ORDER BY appointmentDate, appointmentTime',
-            [doctorID]
-        );
-        res.status(200).json(rows);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Error fetching appointments' });
-    }
+// Fetch appointments for a specific doctor
+router.get('/api/appointments/doctor/:doctorID', async (req, res) => {
+  const doctorID = req.params.doctorID;
+
+  try {
+    const [appointments] = await db.query(
+      `SELECT id, patient_name AS patientName, 
+              DATE_FORMAT(appointment_date, '%Y-%m-%d') AS date, 
+              TIME_FORMAT(appointment_time, '%H:%i') AS time
+       FROM appointments 
+       WHERE doctor_id = ? 
+       ORDER BY appointment_date, appointment_time`, 
+      [doctorID]
+    );
+
+    res.json(appointments);
+  } catch (error) {
+    console.error('Error fetching appointments:', error);
+    res.status(500).json({ message: 'Failed to fetch appointments' });
+  }
 });
-
 
 module.exports = router;
