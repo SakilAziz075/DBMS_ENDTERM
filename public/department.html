@@ -156,45 +156,46 @@
     </style>
 </head>
 <body>
-    <h1 style="color: #3b1e54;">Doctors in <span id="departmentName"></span> Department</h1>
-    <div id="doctors" class="doctor-cards"></div>
+  <h1 style="color: #3b1e54">
+    Doctors in <span id="departmentName"></span> Department
+  </h1>
+  <div id="doctors" class="doctor-cards"></div>
 
-    <!-- Appointment Form Modal -->
-    <div id="appointmentForm" class="modal">
-        <h2>Book Appointment</h2>
-        <p>Doctor: <span id="selectedDoctor"></span></p>
-        <form action="http://localhost:3000/api/appointments" method="POST">
-            <input type="hidden" id="doctorID" name="doctorID"> <!-- Hidden input for doctor ID -->
-            <input type="hidden" id="appointmentTime" name="appointmentTime"> <!-- Hidden input for selected time -->
-            <div>
-                <label for="patientName">Patient Name:</label>
-                <input type="text" id="patientName" name="patientName" required>
-            </div>
-            <div>
-                <label for="age">Age:</label>
-                <input type="number" id="age" name="age" required>
-            </div>
-            <div>
-                <label for="guardianName">Guardian Name:</label>
-                <input type="text" id="guardianName" name="guardianName">
-            </div>
-            <div>
-                <label for="gender">Gender:</label>
-                <select id="gender" name="gender" required>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Other">Other</option>
-                </select>
-            </div>
-            <div>
-                <p>Select Time Slot:</p>
-                <div id="timeSlots"></div>
-            </div>
-            
-            <button type="submit">Submit</button>
-            <button type="button" onclick="closeAppointmentForm()">Cancel</button>
-        </form>
-    </div>
-    <div id="modalOverlay" class="modal-overlay" onclick="closeAppointmentForm()"></div>
+  <!-- Appointment Form Modal -->
+  <div id="appointmentForm" class="modal">
+      <h2>Book Appointment</h2>
+      <p>Doctor: <span id="selectedDoctor"></span></p>
+      <form id="appointmentFormSubmit">
+          <input type="hidden" id="doctorID" name="doctorID"> <!-- Hidden input for doctor ID -->
+          <input type="hidden" id="appointmentTime" name="appointmentTime"> <!-- Hidden input for selected time -->
+          <div>
+              <label for="patientName">Patient Name:</label>
+              <input type="text" id="patientName" name="patientName" required>
+          </div>
+          <div>
+              <label for="age">Age:</label>
+              <input type="number" id="age" name="age" required>
+          </div>
+          <div>
+              <label for="guardianName">Guardian Name:</label>
+              <input type="text" id="guardianName" name="guardianName">
+          </div>
+          <div>
+              <label for="gender">Gender:</label>
+              <select id="gender" name="gender" required>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+              </select>
+          </div>
+          <div>
+              <p>Select Time Slot:</p>
+              <div id="timeSlots"></div>
+          </div>
+          <button type="submit">Submit</button>
+          <button type="button" onclick="closeAppointmentForm()">Cancel</button>
+      </form>
+  </div>
+  <div id="modalOverlay" class="modal-overlay" onclick="closeAppointmentForm()"></div>
 </body>
 </html>
