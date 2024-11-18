@@ -103,6 +103,15 @@
             document.getElementById('departmentName').textContent = department;
             fetchDoctors(department);
         });
+
+        
+          // Set minimum date for appointment date input
+          document.addEventListener("DOMContentLoaded", () => {
+            const today = new Date().toISOString().split("T")[0]; // Get today's date in YYYY-MM-DD format
+            document.getElementById("appointmentDate").setAttribute("min", today);
+          });
+
+
     </script>
     
     <style>
@@ -184,6 +193,11 @@
                   <option value="Other">Other</option>
               </select>
           </div>
+          <div>
+            <label for="appointmentDate">Appointment Date:</label>
+            <input type="date" id="appointmentDate" name="appointmentDate" required min="">
+          </div>
+          
           <div>
               <p>Select Time Slot:</p>
               <div id="timeSlots"></div>
