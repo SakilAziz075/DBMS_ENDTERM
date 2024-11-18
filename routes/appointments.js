@@ -39,26 +39,31 @@ router.post("/", async (req, res) => {
 });
 
 
-// Fetch appointments for a specific doctor
-router.get('/api/appointments/doctor/:doctorID', async (req, res) => {
-  const doctorID = req.params.doctorID;
+router.get('/doctor/:doctorID', async (req, res) => {
+  const { doctorID } = req.params;
+  console.log('Received request for doctorID:', doctorID); // Log doctorID
 
   try {
     const [appointments] = await db.query(
-      `SELECT id, patient_name AS patientName, 
-              DATE_FORMAT(appointment_date, '%Y-%m-%d') AS date, 
-              TIME_FORMAT(appointment_time, '%H:%i') AS time
+      `SELECT 
+         patient_name AS patientName, 
+         age, 
+         guardian_name AS guardianName, 
+         gender, 
+         DATE_FORMAT(appointment_date, '%Y-%m-%d') AS appointmentDate, 
+         TIME_FORMAT(appointment_time, '%H:%i') AS appointmentTime
        FROM appointments 
        WHERE doctor_id = ? 
-       ORDER BY appointment_date, appointment_time`, 
+       ORDER BY appointment_date, appointment_time`,
       [doctorID]
     );
-
+    console.log('Query result:', appointments); // Log query result
     res.json(appointments);
   } catch (error) {
     console.error('Error fetching appointments:', error);
-    res.status(500).json({ message: 'Failed to fetch appointments' });
+    res.status(500).json({ message: 'Error fetching appointments' });
   }
 });
 
 module.exports = router;
+
