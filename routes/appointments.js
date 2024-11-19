@@ -28,8 +28,8 @@ router.post("/", async (req, res) => {
     const appointmentTime24Hour = convertTo24HourFormat(appointmentTime);
 
     await db.query(
-      `INSERT INTO appointments (doctor_id, patient_name, age, guardian_name, gender, appointment_time) VALUES (?, ?, ?, ?, ?, ?)`,
-      [doctorID, patientName, age, guardianName || null, gender, appointmentDate, appointmentTime24Hour]
+      `INSERT INTO appointments (doctor_id, patient_name, age, guardian_name, gender, appointment_time,appointment_date) VALUES (?, ?, ?, ?, ?, ?,?)`,
+      [doctorID, patientName, age, guardianName || null, gender, appointmentTime24Hour,appointmentDate]
     );
     res.status(201).json({ message: "Appointment booked successfully!" });
   } catch (error) {
