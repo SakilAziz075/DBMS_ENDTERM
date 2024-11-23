@@ -1,44 +1,40 @@
-document.querySelector('.submit').addEventListener('click', function(event) {
-    const idInput = document.getElementById('id');
-    const passwordInput = document.getElementById('password');
-    let formIsValid = true;
+document.querySelector('.submit').addEventListener('click', async function (event) {
+    event.preventDefault();
 
-    // Check if fields are empty
-    if (!idInput.value) {
-        formIsValid = false;
-        showError(idInput, 'Please enter your ID');
-    } else {
-        removeError(idInput);
+    const nameInput = document.getElementById('id').value.trim(); // Use 'id' input for the full name
+    const passwordInput = document.getElementById('password').value.trim();
+    const selectedRole = document.querySelector('.tab.active').id;
+
+    if (!nameInput || !passwordInput) {
+        alert('Please fill in all fields.');
+        return;
     }
 
-    if (!passwordInput.value) {
-        formIsValid = false;
-        showError(passwordInput, 'Please enter your password');
-    } else {
-        removeError(passwordInput);
-    }
+    try {
+        if (selectedRole === 'doctor-tab') {
+            const response = await fetch('http://localhost:3000/api/doctors/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ full_name: nameInput, password: passwordInput }), // Send name for login
+            });
 
-    // If form is valid, proceed with redirect
-    if (formIsValid) {
-        // Get the selected role (Patient or Doctor)
-        const selectedRole = document.querySelector('.tab.active').id;
-
-        if (selectedRole === 'patient-tab') {
-            window.location.href = 'patient-dashboard.html'; // Redirect to patient dashboard
-        }else if (selectedRole === 'doctor-tab') {
-            // Simulate storing doctorID (replace with actual ID from the server response)
-            const doctorID = idInput.value;
-            localStorage.setItem('doctorID', doctorID);
-            window.location.href = 'doctor-dashboard.html'; // Redirect to doctor dashboard
+            const data = await response.json();
+            if (response.status === 200) {
+                alert(data.message);
+                localStorage.setItem('doctorID', data.doctor.id); // Save doctor ID
+                localStorage.setItem('doctorName', data.doctor.name); // Optional: Save doctor name
+                window.location.href = 'doctor-dashboard.html'; // Redirect to dashboard
+            } else {
+                alert(data.message); // Show error message
+            }
         }
-        
-    }
-
-    // Prevent form submission if validation fails
-    if (!formIsValid) {
-        event.preventDefault(); // Prevent form submission
+    } catch (error) {
+        console.error('Error during doctor login:', error);
+        alert('An error occurred during login.');
     }
 });
+
+
 // Function to show error message
 function showError(input, message) {
     let errorMessage = input.nextElementSibling;
@@ -73,16 +69,16 @@ function selectTab(role) {
     // Update ID label and avatar image based on selected role
     switch (role) {
         case 'Patient':
-            idLabel.textContent = 'Patient ID';
+            idLabel.textContent = 'Patient Name';
             avatarImg.src = '../assests/user.png'; // Correct path to the patient avatar image
             break;
         case 'Doctor':
-            idLabel.textContent = 'Doctor ID';
+            idLabel.textContent = 'Doctor Name';
             avatarImg.src = './assests/doctor.png'; // Path to the doctor avatar image
             break;
   
         default:
-            idLabel.textContent = 'Patient ID';
+            idLabel.textContent = 'Patient Name';
             avatarImg.src = './assests/user.png'; // Fallback to patient avatar
             break;
     }
