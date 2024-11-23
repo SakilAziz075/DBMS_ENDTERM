@@ -2,6 +2,27 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db');
 
+// Doctor Login Route
+router.post('/login', async (req, res) => {
+    const { full_name, password } = req.body;
+
+    try {
+        const [rows] = await db.query('SELECT * FROM doctors WHERE name = ? AND password = ?', [full_name, password]);
+
+        if (rows.length > 0) {
+            res.status(200).json({ message: 'Login successful', doctor: rows[0] });
+        } else {
+            res.status(401).json({ message: 'Invalid name or password' });
+        }
+    } catch (error) {
+        console.error('Error during doctor login:', error);
+        res.status(500).json({ message: 'Error during login', error: error.message });
+    }
+});
+
+
+
+
 // Get doctors by department and generate available time slots
 router.get('/', async (req, res) => {
     const department = req.query.department;
