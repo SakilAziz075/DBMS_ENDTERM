@@ -65,5 +65,48 @@ router.get('/doctor/:doctorID', async (req, res) => {
   }
 });
 
+router.get('/patient/:patientName', async (req, res) => {
+  const { patientName } = req.params;
+  console.log('Fetching appointments for patient:', patientName);
+
+  try {
+      const [appointments] = await db.query(
+          `SELECT 
+              doctor_id AS doctorID,
+              patient_name AS patientName,
+              age,
+              guardian_name AS guardianName,
+              gender,
+              DATE_FORMAT(appointment_date, '%Y-%m-%d') AS appointmentDate,
+              TIME_FORMAT(appointment_time, '%H:%i') AS appointmentTime
+          FROM appointments 
+          WHERE patient_name = ? 
+          ORDER BY appointment_date, appointment_time`,
+          [patientName]
+      );
+
+      if (appointments.length === 0) {
+          return res.status(404).json({ message: 'No appointments found for the patient.' });
+      }
+
+      console.log('Appointments found:', appointments);
+      res.json(appointments);
+  } catch (error) {
+      console.error('Error fetching patient appointments:', error);
+      res.status(500).json({ message: 'Error fetching patient appointments' });
+  }
+});
+
+// Route to fetch all doctors
+router.get("/doctors", async (req, res) => {
+  try {
+      const [doctors] = await db.query(`SELECT id, name FROM doctors`);
+      res.json(doctors);
+  } catch (error) {
+      console.error("Error fetching doctors:", error);
+      res.status(500).json({ error: "Database error occurred!" });
+  }
+});
+
 module.exports = router;
 
