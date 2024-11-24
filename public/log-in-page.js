@@ -17,6 +17,7 @@ document.querySelector('.submit').addEventListener('click', async function (even
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ full_name: nameInput, password: passwordInput }), // Send name for login
             });
+            
 
             const data = await response.json();
             if (response.status === 200) {
@@ -26,9 +27,16 @@ document.querySelector('.submit').addEventListener('click', async function (even
                 window.location.href = 'doctor-dashboard.html'; // Redirect to dashboard
             } else {
                 alert(data.message); // Show error message
+            }}
+            else if (selectedRole === 'patient-tab') {
+                // Patient Login
+                // For now, we only validate the patient by name (no real password check)
+                localStorage.setItem('patientName', nameInput); // Save patient name in localStorage
+                alert(`Welcome, ${nameInput}!`);
+                window.location.href = 'patient-dashboard.html'; // Redirect to patient dashboard
             }
         }
-    } catch (error) {
+     catch (error) {
         console.error('Error during doctor login:', error);
         alert('An error occurred during login.');
     }
